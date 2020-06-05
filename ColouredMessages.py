@@ -1,6 +1,6 @@
 import pprint
 from enum import Enum, unique
-from typing import Dict, List, Literal
+from typing import Dict, List, Literal, Any
 
 
 TextStyle: Dict[str, int] = {
@@ -71,7 +71,7 @@ class ColourMsg(Enum):
     ENDC: str = '\033[0m'
 
     @staticmethod
-    def get(value) -> Enum.value:
+    def get(value):
         """
         Get a single valid item of ColourMsg enum.
         """
@@ -82,7 +82,7 @@ class ColourMsg(Enum):
             raise TypeError
 
     @staticmethod
-    def list() -> List[Enum.value]:
+    def list_all() -> List[Any]:
         """
         List all items of ColourMsg enum.
         """
@@ -106,7 +106,7 @@ def cmsg(message: str, msg_type: str) -> None:
     """
 
     item = ColourMsg.get(msg_type)
-    assert item in ColourMsg.list()
+    assert item in ColourMsg.list_all()
     print("{}[ {} ]\033[0m \t{}".format(
         item.value,
         item.name,
@@ -115,3 +115,4 @@ def cmsg(message: str, msg_type: str) -> None:
 
 if __name__ == '__main__':
     show()
+
